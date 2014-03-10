@@ -4,12 +4,12 @@
     <td class="cel2 bold cell" align="right"><%= order.display_total.to_html %></td>
   </tr>
   <% @order.adjustments.eligible.each do |adjustment| %>
-  <% next if (adjustment.originator_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
-  <% next if  (adjustment.amount == 0) %>
-  <tr>
-    <td class="cel1 bold"><%= adjustment.label %>: </td>
-    <td class="cel2 cell" align="right"><%= number_to_currency adjustment.amount %></td>
-  </tr>
+    <% next if (adjustment.originator_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+    <% next if  (adjustment.amount == 0) %>
+    <tr>
+      <td class="cel1 bold"><%= adjustment.label %>: </td>
+      <td class="cel2 cell" align="right"><%= number_to_currency adjustment.amount %></td>
+    </tr>
   <% end %>
 
   <tr>
@@ -17,14 +17,15 @@
     <td class="cel2 cell" align="right"><strong><span id='summary-order-total'><%= order.display_total.to_html %></span></strong></td>
   </tr>
   <% if @order.line_item_adjustment_totals.present? %>
-  <tr>
-    <td class="cel1"></td>
-    <td class="cel2"></td>
-  </tr>
-  <% @order.line_item_adjustment_totals.each do |key, total| %>
-  <tr class="total">
-    <td class="cel1 bold"><%= key %>:</td>
-    <td class="cel2 cell" align="right"><%= total %></td>
-  </tr>
+    <tr>
+      <td class="cel1"></td>
+      <td class="cel2"></td>
+    </tr>
+    <% @order.line_item_adjustment_totals.each do |key, total| %>
+      <tr class="total">
+        <td class="cel1 bold"><%= key %>:</td>
+        <td class="cel2 cell" align="right"><%= total %></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
