@@ -11,6 +11,6 @@
   <% end %>
   <tr>
     <td class="cel1 bold" style="border-bottom:solid 1px #cccccc;"><font face="Arial, Helvetica, sans-serif" size="2"><strong><%= t(:order_total) %>:</strong></font></td>
-    <td class="cel2 cell" align="right" style="border-bottom:solid 1px #cccccc;"><font face="Arial, Helvetica, sans-serif" size="2"><strong><span id='summary-order-total'><%= @order.display_total.to_html %></span></strong></font></td>
+    <td class="cel2 cell" align="right" style="border-bottom:solid 1px #cccccc;"><font face="Arial, Helvetica, sans-serif" size="2"><strong><span id='summary-order-total'><%= number_to_currency @order.total %></span></strong></font></td>
   </tr>
 </table>
