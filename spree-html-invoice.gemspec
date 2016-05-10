@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_html_invoice'
-  s.version     = '1.2'
+  s.version     = '3.0.0'
   s.summary     = 'Print invoices from a spre order'
   s.required_ruby_version = '>= 1.9.3'
   s.authors = ["Torsten Ruger", "Chandramohan Rangaswamy"]
