@@ -2,8 +2,10 @@ module Spree::HtmlInvoice; end
 
 module SpreeHtmlInvoice
   class Engine < Rails::Engine
-    engine_name 'spree_html_invoice'
 
+    require 'spree/core'
+    isolate_namespace Spree
+    engine_name 'spree_html_invoice'
     config.autoload_paths += %W(#{config.root}/lib)
 
     initializer "spree_html_invoice.assets.precompile", :after => "spree.assets.precompile" do |app|
