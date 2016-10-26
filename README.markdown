@@ -66,10 +66,3 @@ Contributing
 5. Make your changes.
 6. Ensure specs pass by running `bundle exec rspec spec`.
 7. Submit your pull request.
-
-Credits
-=======
-
-[![vinsol.com: Ruby on Rails, iOS and Android developers](http://vinsol.com/themes/vinsoldotcom-theme/images/new_img/vin_logo.png "Ruby on Rails, iOS and Android developers")](http://vinsol.com)
-
-Copyright (c) 2016 [vinsol.com](http://vinsol.com "Ruby on Rails, iOS and Android developers"), released under the New MIT License
