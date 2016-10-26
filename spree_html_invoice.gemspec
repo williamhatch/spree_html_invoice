@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_html_invoice'
@@ -15,5 +13,12 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
 
   s.add_dependency('spree_core', '~> 3.0.0')
+  s.add_development_dependency 'capybara', '~> 2.6'
+  s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency 'factory_girl', '~> 4.5'
+  s.add_development_dependency 'ffaker'
+  s.add_development_dependency 'rspec-rails', '~> 3.4'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'sqlite3'
 
 end
