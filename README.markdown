@@ -10,7 +10,7 @@ If you have improvements, please send pull though.
 
 1. To install you need to add the following lines to your Gemfile (no external dependencies)
 
-    gem 'spree_html_invoice' , :git => 'git://github.com/vinsol-spree-contrib/spree-html-invoice.git', branch: '3-0-stable'
+    gem 'spree_html_invoice' , github: 'vinsol-spree-contrib/spree-html-invoice', branch: '3-0-stable'
 
 2. run bundler
 
