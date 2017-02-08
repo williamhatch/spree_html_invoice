@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_html_invoice'
-  s.version     = '3.2.0.alpha'
+  s.version     = '3.2.0.rc2'
   s.summary     = 'Print invoices from a spre order'
   s.required_ruby_version = '>= 1.9.3'
   s.authors = ["Torsten Ruger", "Chandramohan Rangaswamy"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = true
 
-  s.add_dependency('spree_core', '~> 3.2.0.alpha')
+  s.add_dependency 'spree_core', '~> 3.2.0.rc2'
   s.add_development_dependency 'capybara', '~> 2.6'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_girl', '~> 4.5'

@@ -32,7 +32,7 @@ Configuration
     ```
     Somewhere in your asset path
 
-2. Override any of the partial templates. they are address, footer, totals, header, thanks , and the line_items. The whole tanks is wrapped in a thanks hook, so replace or add at will.
+2. Override any of the partial templates. they are address, footer, totals, header, thanks , and the line_items. The whole thanks is wrapped in a thanks hook, so replace or add at will.
 
 3. Set `Spree::HtmlInvoice::Config.set(:suppress_anonymous_address)` option to get blank addresses for anonymous email addresses (as created by my spree_last_address extension for empty/unknown user info)
 
