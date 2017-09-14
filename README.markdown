@@ -3,38 +3,33 @@ Spree-Html-Invoice
 
 This extension provides a "Print Invoice" button on the Admin Orders view screen which opens a printable html page with the order details.
 
-INSTALLATION
-============
+Installation
+------------
 
-If you have improvements, please send pull though.
+1. Add this extension to your Gemfile with this line:
 
-1. To install you need to add the following lines to your Gemfile (no external dependencies)
-
-
-  #### Spree >= 3.1
+  #### Spree > 3.3
 
   ```ruby
-  gem 'spree_html_invoice', github: 'vinsol-spree-contrib/spree-html-invoice'
+    gem 'spree_html_invoice', git: 'https://github.com/vinsol-spree-contrib/spree-html-invoice', branch: 'master'
   ```
 
-  #### Spree 3.0 and Spree 2.x
+  #### Spree <= 3.3
 
   ```ruby
-  gem 'spree_html_invoice', github: 'vinsol-spree-contrib/spree-html-invoice', branch: 'X-X-stable'
+    gem 'spree_html_invoice', git: 'https://github.com/vinsol-spree-contrib/spree-html-invoice', branch: 'X-X-stable'
   ```
 
   The `branch` option is important: it must match the version of Spree you're using.
   For example, use `3-0-stable` if you're using Spree `3-0-stable` or any `3.0.x` version.
 
-2. Run bundler
-    ```ruby
+
+2. Install the gem using Bundler:
+  ```ruby
     bundle install
-    ```
+  ```
 
 3. Configure your logo and footer text or more. It's easy as it's html.
-
-4. Enjoy!
-
 
 Configuration
 ==============
