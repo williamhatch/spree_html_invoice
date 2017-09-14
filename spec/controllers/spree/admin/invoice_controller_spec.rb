@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spree::Admin::InvoiceController, type: :controller do
 
-  describe "GET 'lasku'" do
+  describe "GET 'show'" do
 
     let(:order) { create(:order) }
 
@@ -11,7 +11,7 @@ describe Spree::Admin::InvoiceController, type: :controller do
     end
 
     def send_request
-      get :lasku, { template: 'invoice', id: order.number }
+      get :show, { template: 'invoice', id: order.number }
     end
 
     it 'assigns @invoice to true' do
