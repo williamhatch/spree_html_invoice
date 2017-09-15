@@ -11,7 +11,7 @@ describe Spree::Admin::InvoiceController, type: :controller do
     end
 
     def send_request
-      get :lasku, params: { template: 'invoice', id: order.number }
+      get :show, params: { template: 'invoice', id: order.number }
     end
 
     it 'assigns @invoice to true' do

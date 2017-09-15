@@ -1,7 +1,7 @@
 module Spree
   module Admin
     class InvoiceController < Spree::BaseController
-      def lasku
+      def show
         template = params[:template]
         instance_variable_set('@' + template, true)
         @order = Spree::Order.find_by(number: params[:id])
