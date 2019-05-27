@@ -2,7 +2,7 @@
 
 en:
   spree:
-    footer_right: "Company  <br/>Phone  <br/> www "
+    footer_right: "Company:  <br/>Phone:  <br/> Website: "
     footer_right2: " Black and White Line Portal <br/><br/>  www.black-line.ae"
 
     size: "Size"
