@@ -88,11 +88,11 @@
         <ul style="text-align:right; list-style:none; margin:0;">
           <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-style:italic; font-weight:500">Shipping Details</li>
            <% if addresses.present? %>
-          <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500"><%= addresses[3][1] %></li>
+          <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500"><%= addresses[0][1] %></li>
           <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300"><%= addresses[5][1] %><br>
-            <%= addresses[0][1] %><br>
+            <%= addresses[2][1] %><br>
             <%= addresses[1][1] %>, <br>
-            <%= addresses[2][1] %>, <br>
+            <%= addresses[3][1] %>, <br>
             <%= addresses[4][1] %></li>
           <% end %>
         </ul>
@@ -108,7 +108,7 @@
     <div class="order-list" style="width:100%; max-width:700px;">
 
       <ul class="purch-set" style="list-style:none; border-bottom:2px solid #cfcece; padding:0 0 10px 0; overflow:hidden;margin-top: 0px;">
-        <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:20%;padding-top: 20px;">#0000120-022019</li>
+        <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:20%;padding-top: 20px;"><%= @order.id%></li>
         <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:35%;padding-left: 50px;">Purchased On: <%= @order.updated_at.strftime("%B %d, %Y") %> Items: <%= @order.item_count %> | Personalised:  <%= @order.sub_orders.map(&:line_items).flatten.select{|li| li.personalized_info.present?}.count %></li>
         <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:35%;padding-left: 10px;">Payment Method: Online Payment Currency: AED</li>
       </ul>
@@ -127,7 +127,7 @@
               <% split_by_vendors = so.variants.group_by(&:vendor) %>
               <% split_by_vendors.each do |vendor, variants| %>
                 <% vendor_line_items = so.line_items.where("variant_id IN(?)", variants.pluck(:id)) %>
-                <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;margin-top:20px;"><%= vendor.name%></div>
+                <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;margin-top:20px;"><%= @order.id.to_s+'-'+so.id.to_s %></div>
                 <% vendor_line_items.each_with_index do |vl, index| %>
                   <% variant = vl.variant %>
                   <% product = vl.product %>
@@ -138,8 +138,9 @@
                                 <td style="width:10%;"><img width="100%" src="images/add-review-profile.jpg" alt="">
                             <% end %>
                               <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; width:55%;padding-left: 20px;"><%= product.fullname rescue product.name %></td>
-                              <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:500; width:35%; text-align:right;color:#ff0000;"><%= vl.display_price.to_html unless @receipt %></td>
+                              <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:500; width:35%; text-align:right;"><%= vl.display_price.to_html unless @receipt %></td>
                             </tr>
+                            <div style="border-bottom: 2px solid #cfcece"></div>
 
                 <% end %>
               <% end %>
