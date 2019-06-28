@@ -1,48 +1,347 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<%= stylesheet_link_tag "admin/html-invoice.css" , media: "all" %>
-<title><%= Spree.t("#{params[:template]}.header") %></title>
-</head>
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+<%#= stylesheet_link_tag "admin/html-invoice.css" , media: "all" %>
+<!--<title><%#= Spree.t("#{params[:template]}.header") %></title>-->
+<!--</head>-->
 
-<body>
-  <div class="a4">
-    <div id="header">
-      <%= render "header" %>
+<!--<body>-->
+<!--  <div class="a4">-->
+<!--    <div id="header">-->
+      <%#= render "header" %>
+<!--    </div>-->
+<!--    <div class="address">-->
+      <%#= render "address" %>
+<!--    </div>-->
+<!--    <div class="wrapper">-->
+<!--      <div class="line_items">-->
+        <%#= render "line_items_#{params[:template]}" %>
+<!--      </div>-->
+<!--      <div class="thanks">-->
+        <%#= render "thanks" %>
+<!--      </div>-->
+<!--      <div class="spacer"> &nbsp;-->
+<!--      </div>-->
+<!--      <div class="totals">-->
+        <%#= render "totals_#{params[:template]}" %>
+<!--      </div>-->
+      <%# if params[:template] != "packaging_slip" %>
+<!--        <div class="states">-->
+          <%#= render "state" %>
+<!--        </div>-->
+<!--        <div class="spacer"> &nbsp;-->
+<!--        </div>-->
+        <%# if @order.reimbursements.reimbursed.any? %>
+<!--          <div class="refund">-->
+            <%#= render "refund" %>
+<!--          </div>-->
+        <%# end %>
+      <%# end %>
+<!--    </div>-->
+<!--    <div class="footer">-->
+      <%#= render "footer" %>
+<!--    </div>-->
+<!--  </div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Black</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  <!-- Owl Stylesheets -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900" rel="stylesheet">
+  <link rel="icon" href="images/black_line_large_favicon_wJ8_icon.ico" type="image/ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+  <style type="text/css">
+    .adress-rgt ul li { margin-bottom:10px; }
+    .purch-set li { float:left; }
+    .product-ul li { float:left; }
+
+    .pdf-social ul {
+      list-style: none;
+    }
+    .pdf-social ul li{ float:left; }
+
+  </style>
+
+</head>
+<body style="margin:0; padding:0; color:#000;">
+
+<div class="page-print" style="width:100%; margin-top:50px;">
+  <div class="wrapper" style="width:100%; max-width:980px; margin:0 auto;">
+
+    <div class="header" style="overflow:hidden;">
+      <div class="logo" style="float:left;">
+        <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="126.002" height="77.408" viewBox="0 0 1255 771">
+          <image id="_Gruppo_" data-name="&lt;Gruppo&gt;" y="336" width="1255" height="183" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH4AAAASCAYAAACdFWqpAAAEf0lEQVRogcWaeahXRRTHP4a81NYHFoVlYehrMQrbULIIq38sigJLCYsCWyzqkbw2/0jbzLY/IgpTWqwgSpEiKm3/p2xRCnqtVJS20Ga+iqyeL058bxyme+/v3pn7fr8vDL93Z86cc2bOzJwzZ94I4BZgKvA9/8cOwBDwM7AaeDaHpg6mAEuB0cCrwLWJ/OpiV2AJcBfwyTDLmg3MASYDewF/A58D64Hl+k2Fzd9M2WgxsLaA33nS5yfgUKDXKreqY5WyJlHRS50MW0w7NTD4OrhAsm8YRhnHAt9UmMuXgbGJsvodv9sKaOYEcjcD3dbwSw3DW7k+QdFOG/59J7t7GPj31pzLP4AjEuR5w9+e034IMOhofgT2zhq3uIZngEnAdOB4HQuXB8qmHJHzHR87dsYk8KqLC4Nx3Nww/3k5hn1Uc7kPsD8wF/g0h25apMyyHW9z+1kgZ6on8Ia/pkDA4mCV7hGpaCcN/3HObhvfEO/x4pfx/gs4roT+3kCXBZFyywz/VCBjnm8cGRAPFQj40v1tR8f2SEU7hUuAiYHsHYE+uZ9U9IlfhtOA10p4Xix30wMsBD5oeF4shjnVfd8NLAuJ/I5fWMDoRUfzfIJCndjxtri/KPGzkxL5jwK+c/webEjvKvA7fqnozw7G91wen3DHn6+gx65bdtX7Vb7+KLUPNLRD2gnb7ftJ3jZdXy2631d1V8r/x8LmZk/X95EOjfMr/a4M6mYVddhSsht8+Q04MlG5du/4cLe/oPplwdh6EmT469KgW1DtQH9w0jztvm2RH1imQ1XDm1//Vv4rFu02/IJgDDNVf3hQ/0CCDG94S9KMa0j3KugvsdfGVv294S0gOVHHg2V6zgDOAd4KmB4WqWg7DT9ayYpM3rqg/eFgTJMj5ZwQ8CmL5puGN/w9yggOBXWFqHKdM3//kaNbHjmAdhr+qmASLlJ9Fn2fHrTHBmU7KzGS8bmvIf2rwBv+atG/HYxrSRGfKoY3PO7o3ohUtF2G30VvD34CLPLeJHe1OYjEszIlUt6KgM/0Cn1srh9ygWcM8u7xXTkuYFEe7yqGH6UIMaN7KVLRdhn+uopxS1gei5R3cMDH7ugHldDfFNA3ncAZq0XuZfT6juF17milF8fpZS7LRt2h+gyvRyrq0a0kwzsFmUDT7U9ggzJhVWEvcFc42kG9RyCX5bFdp0OXKmcr572h5lj65Vpu1ffuqrtTbnGT5vMY4EZ3Pc7wbk15rfCDYo2Nmg+ky1adTv+i7iONRa4HRCo0v6YsK2fVlLEo6H+S6sfoUcgXw4TALTwROTaUMcsbwzYt3ry2GQnyWj3S9Oga7uXNzRrrPMtaOTlB0csiDH9uDf4Tg74rK/RBSRzf75TI8RnOlKFbjes9LboUtDI8OsVD2X0jtfWnFfwjxggdUQOKFlcogo3FermJgQrHd5ci8DrHrr2AfQh8DfxekoIOYbls88m2cCwB89/TZQRWAbspw2nXYdPJjltzKzbH9jR8v5ItqXjS5eRfKWD2po59e2izOZkAzPgHrB00CdPSBggAAAAASUVORK5CYII="/>
+          <image id="_Gruppo_2" data-name="&lt;Gruppo&gt;" x="419" y="686" width="417" height="85" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAJCAYAAABE+77DAAABYklEQVQ4jbXUQUtUURQH8N9Mg2WYgiBEhm4EgywCv4D4KYL6AC2iVR8gyKVDm5Yt27QMWgSBgm3aCpJW0KYBLYhiQsFiGLlwHjzGeXecwf5w3uHed865//c/5134gTfOjofYx1Im4xm+YbJn/xZe4lJF3k200EG3ZJ0GZrAwBNF5XMV0JuYGrmMc7dibwgdcxv2KvFRzFgcRW8eFVKMRAT+HIPon/HEmprfeFewEyfeZvL/hH+B1+UWjf/y54Ttq2MM1/Mu0vYxV7IaaSdVW/T8RrMd8pfZvB8m7+Iy5TF43/CN8wsfoxJNRFK31FO2HYi6/hIKJ5Cs8D5UG1d7EVqyTvS2IHo1AOId2HJBI3guSCRcHzHbR4TVslF8URFfQDJVq4ZtxDfViItZjmQMXwxdKFkg/VbIqFGqv411J4cP0SDOQvrJ8byVbrqj2GL9wO3PgCzzts/815rQKd/D7FBe6J34CSc7m3+WYAAAAAElFTkSuQmCC"/>
+          <image id="_Gruppo_3" data-name="&lt;Gruppo&gt;" x="543" width="128" height="171" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAARCAYAAAAG/yacAAAAgUlEQVQokd3SPQ4BARDF8R8RUdByPidwG41EBFdQKDZ7F9H6iI2ChkyyrWWn9JLp5p+ZefPgiBeuDXXHEyv0A7rV0K+1zUCnrvZ6ZKB5DwUm9ZqfFMd3sMQmMeg/FY4sMEb1xb147Bo7iUTMMtAhk4hhBiojRheMcG5ojL4B9pi+AYtGShBZyFHgAAAAAElFTkSuQmCC"/>
+        </svg>
+      </div>
+      <div class="adress-rgt" style="float:right">
+        <ul style="text-align:right; list-style:none; margin:0;">
+          <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-style:italic; font-weight:500">Shipping Details</li>
+           <% if addresses.present? %>
+          <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500"><%= addresses[3][1] %></li>
+          <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300"><%= addresses[5][1] %><br>
+            <%= addresses[0][1] %><br>
+            <%= addresses[1][1] %>, <br>
+            <%= addresses[2][1] %>, <br>
+            <%= addresses[4][1] %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-    <div class="address">
-      <%= render "address" %>
+
+    <div class="main-title" style="text-align:center;">
+      <h1 style="font-family: 'Montserrat', sans-serif; font-size:28px; font-weight:500">INVOICE</h1>
     </div>
-    <div class="wrapper">
-      <div class="line_items">
-        <%= render "line_items_#{params[:template]}" %>
-      </div>
-      <div class="thanks">
-        <%= render "thanks" %>
-      </div>
-      <div class="spacer"> &nbsp;
-      </div>
-      <div class="totals">
-        <%= render "totals_#{params[:template]}" %>
-      </div>
-      <% if params[:template] != "packaging_slip" %>
-        <div class="states">
-          <%= render "state" %>
-        </div>
-        <div class="spacer"> &nbsp;
-        </div>
-        <% if @order.reimbursements.reimbursed.any? %>
-          <div class="refund">
-            <%= render "refund" %>
+
+    <div class="detail-heading" style="font-family: 'Montserrat', sans-serif; font-style:italic; font-size:15px; font-weight:500; color:#000;">Order Details</div>
+
+    <div class="order-list" style="width:100%; max-width:700px;">
+
+      <ul class="purch-set" style="list-style:none; border-bottom:2px solid #cfcece; padding:0 0 10px 0; overflow:hidden;margin-top: 0px;">
+        <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:20%;padding-top: 20px;">#0000120-022019</li>
+        <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:35%;padding-left: 50px;">Purchased On: <%= @order.updated_at.strftime("%B %d, %Y") %> Items: <%= @order.item_count %> | Personalised:  <%= @order.sub_orders.map(&:line_items).flatten.select{|li| li.personalized_info.present?}.count %></li>
+        <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:35%;padding-left: 10px;">Payment Method: Online Payment Currency: AED</li>
+      </ul>
+
+
+      <div class="wit" style="width:80%;">
+        <table class="product-ul" style="list-style:none; padding:0 0 20px 0; overflow:hidden; margin-top:20px; width:100%; border-bottom:2px solid #cfcece;">
+          <tbody>
+          <% if @order.is_parent? %>
+
+
+            <% @main_order = @order %>
+            <% @order.sub_orders.each do |so| %>
+
+              <% @sub_order = so %>
+              <% split_by_vendors = so.variants.group_by(&:vendor) %>
+              <% split_by_vendors.each do |vendor, variants| %>
+                <% vendor_line_items = so.line_items.where("variant_id IN(?)", variants.pluck(:id)) %>
+                <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;margin-top:20px;"><%= vendor.name%></div>
+                <% vendor_line_items.each_with_index do |vl, index| %>
+                  <% variant = vl.variant %>
+                  <% product = vl.product %>
+                            <tr>
+                              <% if product.images.first.try(:url).present? %>
+                                <td style="width:10%;"><%= image_tag product.images.first.try(:url),alt: 'product image' %></td>
+                                <% else %>
+                                <td style="width:10%;"><img width="100%" src="images/add-review-profile.jpg" alt="">
+                            <% end %>
+                              <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; width:55%;padding-left: 20px;"><%= product.fullname rescue product.name %></td>
+                              <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:500; width:35%; text-align:right;color:#ff0000;"><%= vl.display_price.to_html unless @receipt %></td>
+                            </tr>
+
+                <% end %>
+              <% end %>
+
+            <% end %>
+
+
+
+
+            <%# @order.sub_orders.each do |sub_order| %>
+          <%# binding.pry %>
+              <%# sub_order.line_items.each do |item| %>
+
+                <%# split_by_vendors = sub_order.variants.group_by(&:vendor) %>
+                <%# split_by_vendors.each do |vendor, variants| %>
+                <%# binding.pry %>
+                <%# end %>
+<!--          <tr>-->
+<!--            <td style="width:10%;"><img width="100%" src="images/add-review-profile.jpg" alt=""></td>-->
+<!--            <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; width:55%;padding-left: 20px;"><%#= item.variant.product.fullname rescue item.variant.product.name %></td>-->
+<!--            <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:500; width:35%; text-align:right;color:#ff0000;"><%#= item.display_price.to_html unless @receipt %></td>-->
+<!--          </tr>-->
+          <%# if item.respond_to? :discount and item.discount > 0 %>
+
+           <%# end %>
+              <%# end %>
+            <%# end %>
+          <% else %>
+            <% @order.line_items.each do |item| %>
+              <tr>
+                <td style="width:10%;"><img width="100%" src="images/add-review-profile.jpg" alt=""></td>
+                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; width:55%;padding-left: 20px;"><%= item.variant.product.fullname rescue item.variant.product.name %></td>
+                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:500; width:35%; text-align:right;color:#ff0000;"><%= item.display_price.to_html unless @receipt %></td>
+              </tr>
+              <% if item.respond_to? :discount and item.discount > 0 %>
+              <% end %>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+<!--        <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;margin-top:20px;">#0000120-022019-QWE</div>-->
+<!--        <table class="product-ul" style="list-style:none; padding:0 0 20px 0; overflow:hidden; margin-top:20px; width:100%; border-bottom:2px solid #cfcece;">-->
+<!--          <tbody>-->
+<!--          <tr>-->
+<!--            <td style="width:10%;"><img width="100%" src="images/add-review-profile.jpg" alt=""></td>-->
+<!--            <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; width:55%;padding-left: 20px;">1x Product Name</td>-->
+<!--            <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:500; width:35%; text-align:right;">$100</td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td style="width:10%;"><img width="100%" src="images/product-img-order.png" alt=""></td>-->
+<!--            <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; width:55%;padding-left: 20px;">1x Product Name</td>-->
+<!--            <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:500; width:35%; text-align:right;">$300</td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+
+        <div class="order-sum">
+          <div style="width:100%; overflow:hidden;">
+            <div class="gb" style="width:40%; float:right;">
+              <h1 style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:500; font-style:italic; text-align:center; width:100%;">Order Summary</h1>
+            </div>
           </div>
-        <% end %>
-      <% end %>
+          <div style="width:100%; overflow:hidden;">
+            <table style="overflow:hidden; width:40%; float:right;">
+              <tbody>
+              <tr>
+                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;">Shipping:</td>
+                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:right;">$<%= @order.display_shipment_total.to_html %></td>
+              </tr>
+<!--              <tr>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;">Discount:</td>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:right;">-$20.00</td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;">Store Credit:</td>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:right;">-$50.00</td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;">Gift Card:</td>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:right;">-$50.00</td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;">VAT:</td>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:right;">$15.00</td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;">ex. VAT Total:</td>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:right;">$ 1,485.00</td>-->
+
+
+              <% if @order.line_item_adjustments.nonzero.exists? || @order.adjustments.nonzero.eligible.exists? %>
+
+                <li class="bd-4">
+                  <% if @order.adjustments.nonzero.eligible.exists? %>
+                    <font class="pull-left">
+                      <%= @order_discount_label.try(:title) %>:
+                    </font>
+                  <% end %>
+
+                  <% if @order.line_item_adjustments.nonzero.exists? %>
+                    <% @order.line_item_adjustments.nonzero.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
+                   <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;"><%= label %>:<%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency).to_html %></td>
+                    <% end %>
+                  <% end %>
+
+                  <% if @order.adjustments.nonzero.eligible.exists? %>
+                    <% @order.adjustments.nonzero.eligible.each do |adjustment| %>
+                      <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+                      <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:right;">$<%= adjustment.display_amount.to_html %> </td>
+                    <% end %>
+                  <% end %>
+
+                </li>
+              <% end %>
+
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="width:100%; overflow:hidden;">
+            <table style="overflow:hidden; width:40%; float:right; border-top:2px solid #cfcece; padding-top:10px; margin-top:10px;">
+              <tbody>
+              <tr>
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;">Total inc. VAT: </td>-->
+<!--                <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:right;">$<%#= @order.display_total.to_html %></td>-->
+
+
+                <%if @order.all_adjustments.nonzero.tax.eligible.any? %>
+                  <td style="font-family: 'Montserrat', sans-serif; font-size:16px; font-weight:300; text-align:left;">
+                    <%#= @order_vat_label.try(:title) %>
+                    <!-- <%# order.all_adjustments.nonzero.tax.eligible.group_by(&:label).each do |label, adjustments| %>
+                      <font class="pull-left">
+                       <%#= label %>:
+                      </font>
+                      <font class="pull-right">
+                    <%#= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency).to_html %>
+                    </font>
+                    <%# end %>
+                    <br> -->
+                    <font class="">
+                      <%= @order_vat_total_label.try(:title) %>:
+                    </font>
+                    <font class="">
+                      <%= Spree::Money.new(order.all_adjustments.nonzero.tax.sum(:amount), currency: @order.currency).to_html %>
+                    </font>
+                  </td>
+
+                <% end %>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
     </div>
-    <div class="footer">
-      <%= render "footer" %>
+
+    <div class="page_no" style="text-align:right">
+      <p style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;">1 / 1</p>
+    </div>
+
+  </div>
+</div>
+
+<!--- footer start ---->
+<footer style="width:100%; background:#ecb68f; overflow:hidden;padding-top: 7px;">
+  <div class="wrapper" style="width:100%; max-width:980px; margin:0 auto;">
+    <div class="pdf-social" style="width:45%; float:left;">
+      <ul style="overflow:hidden; padding:0;"><li> <span style="float:left;"><svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                                                  width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+<g id="Instagram_2_">
+	<circle id="back_7_" cx="12.5" cy="12.5" r="12.289"/>
+	<path id="Instagram_3_" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M17.794,11.441h-1.198
+		c0.087,0.339,0.139,0.693,0.139,1.059c0,2.339-1.896,4.235-4.235,4.235c-2.339,0-4.235-1.896-4.235-4.235
+		c0-0.366,0.052-0.72,0.139-1.059H7.206v5.824c0,0.292,0.237,0.529,0.53,0.529h9.528c0.293,0,0.53-0.237,0.53-0.529V11.441z
+		 M17.794,7.735c0-0.292-0.237-0.529-0.53-0.529h-1.588c-0.292,0-0.529,0.237-0.529,0.529v1.588c0,0.292,0.237,0.529,0.529,0.529
+		h1.588c0.293,0,0.53-0.237,0.53-0.529V7.735z M12.5,9.853c-1.462,0-2.647,1.185-2.647,2.647c0,1.462,1.185,2.647,2.647,2.647
+		c1.462,0,2.647-1.185,2.647-2.647C15.147,11.038,13.962,9.853,12.5,9.853 M17.794,19.382H7.206c-0.877,0-1.588-0.711-1.588-1.589
+		V7.206c0-0.877,0.711-1.588,1.588-1.588h10.588c0.877,0,1.588,0.711,1.588,1.588v10.587C19.382,18.67,18.671,19.382,17.794,19.382"
+    />
+</g>
+</svg></span><font style="font-family: 'Montserrat', sans-serif; font-size:12px; font-weight:300; margin-left:10px;">@blackline.me</font></li>
+        <li style="margin-left:20px;"><span style="float:left;"><svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                                     width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+<g>
+	<circle id="facebook-back_4_" cx="12.5" cy="12.5" r="12.308"/>
+	<path id="facebook-facebook_4_" fill="#FFFFFF" d="M18.488,5.769H6.512c-0.41,0-0.743,0.333-0.743,0.743v11.976
+		c0,0.41,0.333,0.743,0.743,0.743h6.447v-5.213h-1.754v-2.032h1.754v-1.498c0-1.739,1.062-2.686,2.613-2.686
+		c0.743,0,1.381,0.055,1.567,0.08v1.817l-1.076,0c-0.844,0-1.007,0.401-1.007,0.989v1.297h2.012l-0.262,2.032h-1.75v5.213h3.43
+		c0.41,0,0.743-0.333,0.743-0.743V6.512C19.231,6.102,18.898,5.769,18.488,5.769z"/>
+</g>
+</svg></span><font style="font-family: 'Montserrat', sans-serif; font-size:12px; font-weight:300; margin-left:10px;">@blackline</font></li>
+      </ul>
+    </div>
+    <div class="pdf-ftr" style="width:55%; float:left; padding-top:2px;">
+      <p style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;"><a style="color: #000;text-decoration: none;" href = "http://black-line.ae">black-line.ae</a></p>
     </div>
   </div>
+</footer>
+<!--- footer end ---->
+
+
 </body>
 </html>
-
