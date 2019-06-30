@@ -101,13 +101,13 @@
             Details
           </li>
           <% if addresses.present? %>
-            <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500"><%= addresses[0][1] %></li>
-            <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300"><%= addresses[5][1] %>
+            <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500"><%= addresses[0][1] rescue ''%></li>
+            <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300"><%= addresses[5][1] rescue ''%>
               <br>
-              <%= addresses[1][1] %>, <br>
-              <%= addresses[2][1] %><br>
-              <%= addresses[3][1] %>, <br>
-              <%= addresses[4][1].partition(' ').last %></li>
+              <%= addresses[1][1] rescue ''%>, <br>
+              <%= addresses[2][1] rescue ''%><br>
+              <%= addresses[3][1] rescue ''%>, <br>
+              <%= addresses[4][1].partition(' ').last rescue '' %></li>
           <% end %>
         </ul>
       </div>
