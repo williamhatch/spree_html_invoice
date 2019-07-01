@@ -77,12 +77,12 @@
     </div>
     <div class="order-list" style="width:100%; max-width:700px;">
       <ul class="purch-set" style="list-style:none; border-bottom:2px solid #cfcece; padding:0 0 10px 0; overflow:hidden;margin-top: 0px;">
-        <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:20%;padding-top: 20px;">#<%= @order.number %></li>
+        <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:20%;padding-top: 20px;">#<%= @order.is_parent? ? @order.number : @order.parent_order.number %></li>
         <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:35%;padding-left: 50px;">Purchased
           On: <%= @order.updated_at.strftime("%d/%m/%Y") %>, Items: <%= @order.item_count %> |
-          Personalised:  <%= @order.sub_orders.map(&:line_items).flatten.select {|li| li.personalized_info.present?}.count %></li>
+          Personalised:  <%= @order.is_parent? ? @order.sub_orders.map(&:line_items).flatten.select {|li| li.personalized_info.present?}.count : @order.line_items.select{|s|s.personalized_info.present?}.count%></li>
         <li style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:500; width:35%;padding-left: 10px;">Payment
-          Method: Online Currency: AED
+          Method: Online Currency: AED          
         </li>
       </ul>
       <div class="wit" style="width:80%;">
@@ -123,7 +123,7 @@
         <% else %>
           <% @order.line_items.each do |item| %>
             <% product = item.variant.product %>
-            <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;">#<%= @order.number.to_s + '-' + @order.parent_order.number.to_s %></div>
+            <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;">#<%= @order.parent_order.number.to_s + '-' +  @order.number.to_s  %></div>
             <table class="product-ul" style="list-style:none; padding:0 0 20px 0; overflow:hidden; margin-top:20px; width:100%; border-bottom:2px solid #cfcece;">
               <tbody>
               <tr>
