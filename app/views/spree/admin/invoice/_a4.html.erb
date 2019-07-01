@@ -122,7 +122,7 @@
           <% end %>
         <% else %>
           <% @order.line_items.each do |item| %>
-            <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;"><%= @order.number.to_s + '-' + @order.number.to_s %></div>
+            <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;"><%= @order.number.to_s %></div>
             <table class="product-ul" style="list-style:none; padding:0 0 20px 0; overflow:hidden; margin-top:20px; width:100%; border-bottom:2px solid #cfcece;">
               <tbody>
               <tr>
