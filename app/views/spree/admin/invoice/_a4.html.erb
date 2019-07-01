@@ -118,17 +118,16 @@
               </tbody>
             </table>
             <% if so.respond_to? :discount and so.discount > 0 %>
-
             <% end %>
           <% end %>
         <% else %>
           <% @order.line_items.each do |item| %>
-            <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;"><%= @order.number.to_s + '-' + so.number.to_s %></div>
+            <div class="qwe-heading" style="font-family: 'Montserrat', sans-serif; font-size:15px; font-weight:300; color:#000;"><%= @order.number.to_s + '-' + @order.number.to_s %></div>
             <table class="product-ul" style="list-style:none; padding:0 0 20px 0; overflow:hidden; margin-top:20px; width:100%; border-bottom:2px solid #cfcece;">
               <tbody>
               <tr>
                 <% if item.variant.images.present? && item.variant.images.first.url(:small).present? %>
-                  <td style="width:10%;"><%= image_tag(main_app.url_for(vl.variant.images.first.url(:small))) %></td>
+                  <td style="width:10%;"><%= image_tag(main_app.url_for(item.variant.images.first.url(:small))) %></td>
                 <% else %>
                   <td style="width:10%;"> <%= link_to small_image(item.variant.product), item.variant.product %></td>
                 <% end %>
