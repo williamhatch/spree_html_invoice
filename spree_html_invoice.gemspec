@@ -12,14 +12,14 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = true
 
-  s.add_dependency 'spree_core', '>= 3.2.0', '< 4.0'
+  s.add_dependency 'spree_core'
 
   s.add_development_dependency 'appraisal'
-  s.add_development_dependency 'capybara', '~> 2.6'
+  s.add_development_dependency 'capybara'
   s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'factory_bot', '~> 4.8.2'
+  s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'rspec-rails', '~> 3.4'
+  s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'coffee-rails'
